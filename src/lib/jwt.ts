@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 
 const DEFAULT_EXPIRY = "7d";
-
 export type JwtPayload = {
   sub: string;
   email: string;
@@ -13,6 +12,7 @@ export function signToken(
   secret = process.env.JWT_SECRET
 ): string {
   if (!secret) throw new Error("JWT_SECRET is not set");
+
   return jwt.sign(payload, secret, { expiresIn: DEFAULT_EXPIRY });
 }
 
