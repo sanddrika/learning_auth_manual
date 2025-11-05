@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "2b433950-ece1-4cfd-b252-285b65295430",
+      "createdAt": "2025-11-05T09:07:43.282Z",
+      "name": "sankrab",
+      "email": "sandro.nietzsche.tabatadze@gmail.com",
+      "password": "1234"
+    }
+  ]
+}
