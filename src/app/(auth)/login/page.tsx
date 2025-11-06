@@ -14,9 +14,7 @@ export default function Page() {
     const formData = new FormData(form);
     const email = String(formData.get("email") || "");
     const password = String(formData.get("password") || "");
-
     setLoading(true);
-
     const res = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -37,7 +35,6 @@ export default function Page() {
     <main className="min-h-screen flex items-center justify-center p-6 bg-background">
       <div className="w-full max-w-sm rounded-xl border border-gray-200/40 bg-white/70 p-6 shadow-sm backdrop-blur dark:border-white/10 dark:bg-black/30">
         <h1 className="mb-6 text-center text-2xl font-semibold">Sign in</h1>
-        {/* onSubmit calls our function when the user clicks the button */}
         <form className="space-y-4" onSubmit={onSubmit}>
           <div className="space-y-2">
             <label
@@ -71,7 +68,7 @@ export default function Page() {
               placeholder="••••••••"
             />
           </div>
-          {/* The button is disabled while loading so the user can't double-submit */}
+
           <button
             type="submit"
             disabled={loading}

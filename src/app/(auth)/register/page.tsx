@@ -9,7 +9,6 @@ export default function Page() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
     const name = String(formData.get("name") || "");
@@ -17,7 +16,6 @@ export default function Page() {
     const password = String(formData.get("password") || "");
 
     setLoading(true);
-
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,7 +38,6 @@ export default function Page() {
         <h1 className="mb-6 text-center text-2xl font-semibold">
           Create account
         </h1>
-
         <form className="space-y-4" onSubmit={onSubmit}>
           <div className="space-y-2">
             <label
@@ -90,7 +87,6 @@ export default function Page() {
               placeholder="••••••••"
             />
           </div>
-
           <button
             type="submit"
             disabled={loading}

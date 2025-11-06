@@ -1,0 +1,15 @@
+1) libis 2 funqcia 
+  A)JWT  //
+  B)prisma  //
+2) api 
+  A) register // 
+  B) login //
+  C) logout //
+  D) me  //
+3) auth
+  A) login
+  B) register
+4) prisma
+  A) migrations
+  B) seed
+  C) schema

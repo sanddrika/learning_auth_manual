@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
-import { findUserByEmail } from "@/src/lib/users";
+import { prisma } from "@/src/lib/prisma";
 import { signToken } from "@/src/lib/jwt";
+import bcrypt from "bcryptjs";
 
+export const runtime = "nodejs";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -9,29 +11,31 @@ export async function POST(request: Request) {
       .trim()
       .toLowerCase();
     const password = String(body?.password || "").trim();
-
     if (!email || !password) {
       return NextResponse.json(
         { error: "Missing credentials" },
         { status: 400 }
       );
     }
-
-    const user = await findUserByEmail(email);
-
-    if (!user || user.password !== password) {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
       return NextResponse.json(
         { error: "Invalid email or password" },
         { status: 401 }
       );
     }
-
+    const ok = await bcrypt.compare(password, user.passwordHash);
+    if (!ok) {
+      return NextResponse.json(
+        { error: "Invalid email or password" },
+        { status: 401 }
+      );
+    }
     const token = signToken({
       sub: user.id,
       email: user.email,
       name: user.name,
     });
-
     const res = NextResponse.json({
       id: user.id,
       name: user.name,
